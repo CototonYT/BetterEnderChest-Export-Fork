@@ -1,0 +1,52 @@
+
+#################
+## IDEs and builds
+#################
+
+.project
+.metadata
+bin/
+target/
+build/
+tmp/
+*.tmp
+*.bak
+*.bat
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.idea/
+.gradle/
+BetterEnderChest.iml
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Minecraft Server log file
+logs/latest.log
+
+############
+## Operating systems
+############
+
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+# Mac crap
+.DS_Store
+
+
+.vscode/settings.json
+
