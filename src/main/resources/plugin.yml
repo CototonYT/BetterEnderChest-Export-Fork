@@ -1,0 +1,115 @@
+name: BetterEnderChest
+main: nl.rutgerkok.betterenderchest.BetterEnderChestPlugin
+description: 'Secure and configurable Ender Chests'
+version: "${version}"
+author: 'Rutger Kok'
+api-version: '1.21.9'
+softdepend:
+- 'BlockLocker'
+- 'Lockette'
+- 'LWC'
+- 'Multiverse-Inventories'
+- 'MultiInv'
+- 'My Worlds'
+- 'SimpleClans'
+- 'WorldInventories'
+commands:
+  betterenderchest:
+    description: Administrative command for BetterEnderChest
+    aliases: [bec]
+    usage: Type /<command> for more information.
+    permission: bec.internal.autocomplete_bec
+  enderchest:
+    description: Open/view the Ender Chest
+    usage: /enderchest [playername]
+    permission: bec.internal.autocomplete_ec
+    aliases: [ec]
+  ecexport:
+    description: Экспорт кастомных эндер-сундуков в ванильные
+    usage: /ecexport
+    permission: betterenderchest.command.export
+permissions:
+  betterenderchest:
+    description: Use all BetterEnderChest features. Only for administrators!
+    children:
+      betterenderchest.command: true
+      betterenderchest.user: true
+# User permissions
+  betterenderchest.user:
+    description: All basic Ender Chest functionality.
+    default: true
+    children:
+      betterenderchest.user.craft: true
+      betterenderchest.user.place: true
+      betterenderchest.user.destroy: true
+      betterenderchest.user.open: true
+      betterenderchest.user.insert: true
+  betterenderchest.user.craft:
+    description: Craft the Ender Chest in the workbench.
+  betterenderchest.user.place:
+    description: Place the Ender Chest in the world.
+  betterenderchest.user.destroy:
+    description: Destroy placed Ender Chests.
+  betterenderchest.user.open:
+    description: Open the Ender Chest, both private and public chests.
+    children:
+      betterenderchest.user.open.privatechest: true
+      betterenderchest.user.open.publicchest: true
+  betterenderchest.user.open.privatechest:
+    description: Open the private Ender Chest
+  betterenderchest.user.open.publicchest:
+    description: Open the public Ender Chest
+  betterenderchest.user.insert:
+    description: Insert items in a private Ender Chest
+# Row permissions
+  betterenderchest.slots.upgrade1:
+    description: Get the rows as specified for this upgrade in the config.yml.
+    default: false
+  betterenderchest.slots.upgrade2:
+    description: Get the rows as specified for this upgrade in the config.yml.
+    default: false
+  # etc.
+# Command permissions
+  betterenderchest.command:
+    description: Use all commands.
+    default: op
+    children:
+      betterenderchest.command.deleteinv: true
+      betterenderchest.command.give: true
+      betterenderchest.command.list: true
+      betterenderchest.command.swapinv: true
+      betterenderchest.command.openinv: true
+      betterenderchest.command.reload: true
+      betterenderchest.command.viewinv: true
+  betterenderchest.command.deleteinv:
+    description: Delete the contents of an Ender Chest inventory.
+    children: { bec.internal.autocomplete_bec: true }
+  betterenderchest.command.give:
+    description: Give an item to an Ender Chest inventory.
+    children: { bec.internal.autocomplete_bec: true }
+  betterenderchest.command.list:
+    description: List all currently loaded Ender Chest inventories.
+    children: { bec.internal.autocomplete_bec: true }
+  betterenderchest.command.swapinv:
+    description: Swap two Ender Chest inventories.
+    children: { bec.internal.autocomplete_bec: true }
+  betterenderchest.command.openinv:
+    description: Open anyone's Ender Chest inventory with a command from any world group.
+    children: { betterenderchest.command.openinv.self: true }
+  betterenderchest.command.openinv.self:
+    description: Open your own Ender Chest inventory with a command, from your current world group.
+    children: { bec.internal.autocomplete_bec: true, bec.internal.autocomplete_ec: true }
+  betterenderchest.command.reload:
+    description: Reload the configuration.
+    children: { bec.internal.autocomplete_bec: true }
+  betterenderchest.command.viewinv:
+    description: View someone else's Ender Chest inventory without being able to modify/steal from it.
+    children: { betterenderchest.command.viewinv.self: true }
+  betterenderchest.command.viewinv.self:
+    description: View someone else's Ender Chest inventory without being able to modify/steal from it.
+    children: { bec.internal.autocomplete_bec: true, bec.internal.autocomplete_ec: true }
+# Internal permissions to handle command autocompletion
+  bec.internal.autocomplete_bec:
+    description: Permission internally used by BetterEnderChest to autocomplete the /bec command.
+  bec.internal.autocomplete_ec:
+    description: Permission internally used by BetterEnderChest to autocomplete the /enderchest command.
